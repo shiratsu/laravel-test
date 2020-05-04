@@ -1,5 +1,5 @@
 #!/bin/bash
-chown ec2-user:ec2-user /home/ec2-user/public_html
+chown ec2-user:ec2-user -R /home/ec2-user/public_html
 chmod 705 /home/ec2-user
 
 /sbin/service crond start

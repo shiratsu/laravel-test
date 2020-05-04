@@ -69,9 +69,17 @@ sed -ri '/DirectoryIndex index.html/s/$/ index.php/g' /etc/httpd/conf/httpd.conf
 
 ## make logs dir
 RUN mkdir /home/ec2-user/logs
+RUN mkdir /home/ec2-user/public_html
+
+RUN cd /home/ec2-user/public_html && /usr/local/bin/composer create-project --prefer-dist laravel/laravel hiratsuka-test "6.*"
+
 
 ## 起動スクリプトの指定
 COPY ./php/startup.sh /etc/startup.sh
 COPY ./apache/000.default.conf /etc/httpd/conf.d/000.default.conf
 RUN chmod +x /etc/startup.sh
 ENTRYPOINT /etc/startup.sh  
+
+WORKDIR /home/ec2-user/public_html/hiratsuka-test
+RUN chmod -R 777 storage
+RUN php artisan list
