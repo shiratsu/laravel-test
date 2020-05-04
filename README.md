@@ -13,3 +13,13 @@ aws --profile all ecs create-service --cluster hiratsuka-laravel-test --service-
 # スケールを調整
 
 # タスク実行
+
+```
+aws ecs run-task \
+    --cluster hiratsuka-laravel-test \
+    --task-definition fargate-laravel-app:2 \
+    --overrides "{\"containerOverrides\":[{\"name\":\"fargate-laravel-app\",\"command\":[\"/bin/sh\",\"-c\",\"php\",\"/app/artisan\",\"down\"]}]}" \
+    --launch-type FARGATE \
+    --network-configuration file://$(pwd)/network.json \
+    --profile all
+```
