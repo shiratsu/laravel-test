@@ -78,7 +78,7 @@ RUN cd /home/ec2-user/public_html && /usr/local/bin/composer create-project --pr
 COPY ./php/startup.sh /etc/startup.sh
 COPY ./apache/000.default.conf /etc/httpd/conf.d/000.default.conf
 RUN chmod +x /etc/startup.sh
-ENTRYPOINT /etc/startup.sh  
+CMD ["sh", "-c", "/etc/startup.sh up"]
 
 WORKDIR /home/ec2-user/public_html/hiratsuka-test
 RUN chmod -R 777 storage

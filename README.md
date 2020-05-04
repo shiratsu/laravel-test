@@ -18,7 +18,7 @@ aws --profile all ecs create-service --cluster hiratsuka-laravel-test --service-
 aws ecs run-task \
     --cluster hiratsuka-laravel-test \
     --task-definition fargate-laravel-app:2 \
-    --overrides "{\"containerOverrides\":[{\"name\":\"fargate-laravel-app\",\"command\":[\"/bin/sh\",\"-c\",\"php\",\"/app/artisan\",\"down\"]}]}" \
+    --overrides "{\"containerOverrides\":[{\"name\":\"fargate-laravel-app\",\"command\":[\"/bin/sh\",\"-c\",\"/etc/startup.sh\",\"down\"]}]}" \
     --launch-type FARGATE \
     --network-configuration file://$(pwd)/network.json \
     --profile all

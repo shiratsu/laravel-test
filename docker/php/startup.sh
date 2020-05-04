@@ -5,9 +5,11 @@ chmod 705 /home/ec2-user
 /sbin/service crond start
 /sbin/service httpd start
 
-/etc/rc.d/init.d/sshd start
+# /etc/rc.d/init.d/sshd start
 
 while true
 do
-    sleep 10
+    sleep 5
 done
+
+php artisan $1
